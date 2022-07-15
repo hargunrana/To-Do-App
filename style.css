@@ -12,7 +12,6 @@ body {
     background-color: #4b4b4b;
     display: flex;
     align-items: center;
-    
 }
 
 .toolbox-cont > * {
@@ -22,45 +21,93 @@ body {
 .toolbox-color-cont {
     height: 3.5rem;
     width: 18rem;
-    background-color: #3d3d3d;  
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.action-button-cont {
-    height: 3.5rem;
-    width: 7rem;
     background-color: #3d3d3d;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    border-radius: 20px;
 }
 
-.color{
+.action-button-cont {
+    height: 3.5rem;
+    width: 8rem;
+    background-color: #3d3d3d;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
+}
+
+.color {
     height: 1.5rem;
     width: 3rem;
-
+    border-radius: 10px;
 }
 
-.lightpink{
-    background-color: lightpink;   
+.lightpink {
+    background-color: lightpink;
 }
 
-
-.lightblue{
-    background-color: lightblue;   
+.lightblue {
+    background-color: lightblue;
 }
 
-.lightgreen{
-    background-color: lightgreen;   
+.lightgreen {
+    background-color: lightgreen;
 }
 
-.black{
-    background-color: black;   
+.black {
+    background-color: black;
 }
 
-.action-button-cont>*{
+.action-button-cont > * {
     font-size: 2rem;
     color: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.toolbox-color-cont > *:hover,
+.action-button-cont > *:hover {
+    background-color: #485460;
+    border-radius: 20px;
+}
+.modal-cont {
+    height: 50vh;
+    width: 45vw;
+    background-color: lightblue;
+    position: absolute;
+    top: calc((100vh - 50vh)/2);
+    left: calc((100vw - 45vw)/2);
+    display: flex;
+}
+
+textarea{
+    height: 100%;
+    width: 75%;
+    font-size: 2rem;
+    background:#dfe4ea;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.priority-color-cont{
+    height: 100%;
+    width: 25%;
+    background-color: #4b4b4b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.priority-color{
+    height: 10%;
+    width: 50%;
+    border-radius: 20px;
+    
 }
