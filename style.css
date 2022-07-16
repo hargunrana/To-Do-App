@@ -135,8 +135,11 @@ textarea {
 }
 
 .ticket-id {
-    height: 1rem;
-    background-color: red;
+    height: 1.5rem;
+    background-color: #dcdcdd;
+    font-size:smaller;
+    padding-left: 5%;
+    padding-top: 1%;
 }
 
 .task-area {
