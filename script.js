@@ -8,6 +8,7 @@ let modalPriorityColor = colors[1];
 let textAreaCont = document.querySelector(".textarea-cont");
 let toolboxColorCont = document.querySelectorAll(".color");
 let ticketsArr = [];
+let removeBtn = document.querySelector(".remove-btn");
 
 //----------------------------To Display Modal on clicking +-------------------------
 
@@ -66,8 +67,13 @@ function createTicket(ticketColor, data, ticketId) {
     `;
 
     mainCont.appendChild(ticketCont);
-    
-    // if already existing tickets are to be added 
+
+    // extra functions on the tickets
+    handleRemoval(ticketCont, id);
+    handleColor(ticketCont, id);
+    handleLock(ticketCont, id);
+
+    // if already existing tickets are to be added
     if (!ticketId) {
         ticketsArr.push({ ticketColor, data, ticketId: id });
         localStorage.setItem("tickets", JSON.stringify(ticketsArr));
@@ -123,3 +129,66 @@ for (let i = 0; i < toolboxColorCont.length; i++) {
         });
     });
 }
+
+//-------------------------Removing existing notes------------------------
+let removeBtnActive = false;
+removeBtn.addEventListener("click", () => {
+    if (!removeBtnActive) {
+        removeBtn.style.color = "red";
+        removeBtn.style.border = "1px solid grey";
+        removeBtn.style.backgroundColor = "#485460";
+    } else {
+        removeBtn.style.color = "white";
+        removeBtn.style.border = "0px solid grey";
+        removeBtn.style.backgroundColor = "#3d3d3d";
+    }
+    removeBtnActive = !removeBtnActive;
+});
+
+function handleRemoval(ticket, id) {
+    ticket.addEventListener("click", () => {
+        if (!removeBtnActive) return;
+        let idx = getTicketIndex(id);
+        let deletedTicket = ticketsArr.splice(idx, 1);
+
+        // removed from local storage and ticketarrays updated
+        let ticketArray = JSON.stringify(ticketsArr);
+        localStorage.setItem("tickets", ticketArray);
+
+        // Ticket removed from frontend
+        ticket.remove();
+    });
+}
+
+function getTicketIndex(id) {
+    let ticketIdx = ticketsArr.findIndex((ticketObj) => {
+        return ticketObj.ticketId == id;
+    });
+    return ticketIdx;
+}
+
+//--------------------------Change Priority of the Ticket color--------------------------
+function handleColor(ticketCont, id) {
+    let ticketColorStrip = ticketCont.querySelector(".ticket-color");
+
+    ticketColorStrip.addEventListener("click", () => {
+        let currTicketColor = ticketColorStrip.classList[1];
+        let currTicketColorIdx = colors.indexOf(currTicketColor);
+
+        let newTicketColorIdx = (currTicketColorIdx + 1) % colors.length;
+
+        let newTicketColor = colors[newTicketColorIdx];
+
+        ticketColorStrip.classList.remove(currTicketColor);
+        ticketColorStrip.classList.add(newTicketColor);
+    });
+
+    let ticketIdx = getTicketIndex(id);
+
+    ticketArr[ticketIdx].ticketColor = newTicketColor;
+    localStorage.setItem("tickets", JSON.stringify(ticketsArr));
+}
+
+//--------------------------Handle Lock/Unlock to edit content--------------------------
+
+function handleLock(ticket, id) {}

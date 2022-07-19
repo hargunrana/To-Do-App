@@ -37,7 +37,11 @@ body {
     justify-content: space-evenly;
     border-radius: 20px;
 }
-
+.remove-btn{
+    color: white;
+    border-radius: 20px;
+    
+}
 .color {
     height: 1.5rem;
     width: 3rem;
@@ -126,6 +130,7 @@ textarea {
     background-color: #f1f2f6;
     border-radius: 10px;
     /* border: 1px solid black; */
+    
 }
 
 .ticket-color {
@@ -152,7 +157,9 @@ textarea {
 
 .main-cont {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 10px;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+    flex-wrap:wrap ;
+    
 }
