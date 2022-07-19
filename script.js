@@ -70,7 +70,7 @@ function createTicket(ticketColor, data, ticketId) {
 
     // extra functions on the tickets
     handleRemoval(ticketCont, id);
-    // handleColor(ticketCont, id);
+    handleColor(ticketCont, id);
     // handleLock(ticketCont, id);
 
     // if already existing tickets are to be added
