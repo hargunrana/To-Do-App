@@ -70,8 +70,8 @@ function createTicket(ticketColor, data, ticketId) {
 
     // extra functions on the tickets
     handleRemoval(ticketCont, id);
-    handleColor(ticketCont, id);
-    handleLock(ticketCont, id);
+    // handleColor(ticketCont, id);
+    // handleLock(ticketCont, id);
 
     // if already existing tickets are to be added
     if (!ticketId) {
@@ -168,25 +168,29 @@ function getTicketIndex(id) {
 }
 
 //--------------------------Change Priority of the Ticket color--------------------------
-function handleColor(ticketCont, id) {
-    let ticketColorStrip = ticketCont.querySelector(".ticket-color");
+function handleColor(ticket, id) {
+    let ticketColorStrip = ticket.querySelector(".ticket-color");
 
     ticketColorStrip.addEventListener("click", () => {
         let currTicketColor = ticketColorStrip.classList[1];
         let currTicketColorIdx = colors.indexOf(currTicketColor);
 
-        let newTicketColorIdx = (currTicketColorIdx + 1) % colors.length;
+        // let newTicketColorIdx = (currTicketColorIdx + 1) % colors.length;
 
+        let newTicketColorIdx = currTicketColorIdx + 1;
+
+        newTicketColorIdx = newTicketColorIdx % colors.length;
         let newTicketColor = colors[newTicketColorIdx];
 
         ticketColorStrip.classList.remove(currTicketColor);
         ticketColorStrip.classList.add(newTicketColor);
+
+        //local storage update
+        let ticketIdx = getTicketIndex(id);
+
+        ticketArr[ticketIdx].ticketColor = newTicketColor;
+        localStorage.setItem("tickets", JSON.stringify(ticketsArr));
     });
-
-    let ticketIdx = getTicketIndex(id);
-
-    ticketArr[ticketIdx].ticketColor = newTicketColor;
-    localStorage.setItem("tickets", JSON.stringify(ticketsArr));
 }
 
 //--------------------------Handle Lock/Unlock to edit content--------------------------
