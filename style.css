@@ -148,11 +148,12 @@ textarea {
 }
 
 .task-area {
-    height: calc(100% - 1 rem - 1rem);
+    height: calc(100% - 1rem - 1rem);
     font-size: 1.5rem;
     outline: none;
     overflow-wrap: break-word;
     padding: 10px 20px 10px 20px;
+    
 }
 
 .main-cont {
@@ -161,5 +162,14 @@ textarea {
     justify-content: center;
     padding: 2rem;
     flex-wrap:wrap ;
+    
+}
+
+.ticket-lock{
+    display: flex;
+    justify-content: flex-end;
+    height: 2rem;
+    margin-top: -2.5rem;
+    margin-right: 1.25rem;
     
 }

@@ -10,6 +10,9 @@ let toolboxColorCont = document.querySelectorAll(".color");
 let ticketsArr = [];
 let removeBtn = document.querySelector(".remove-btn");
 
+let lockClass = "fa-lock";
+let unlockClass = "fa-lock-open";
+
 //----------------------------To Display Modal on clicking +-------------------------
 
 let isModalPresent = false;
@@ -63,6 +66,10 @@ function createTicket(ticketColor, data, ticketId) {
         <div class="ticket-color ${ticketColor}"></div>
         <div class="ticket-id">#${id}</div>
         <div class="task-area"> ${data} </div>
+        <div class = "ticket-lock">
+            <i class="fa-solid fa-lock"></i>
+        </div>
+        
 
     `;
 
@@ -71,7 +78,7 @@ function createTicket(ticketColor, data, ticketId) {
     // extra functions on the tickets
     handleRemoval(ticketCont, id);
     handleColor(ticketCont, id);
-    // handleLock(ticketCont, id);
+    handleLock(ticketCont, id);
 
     // if already existing tickets are to be added
     if (!ticketId) {
@@ -188,11 +195,32 @@ function handleColor(ticket, id) {
         //local storage update
         let ticketIdx = getTicketIndex(id);
 
-        ticketArr[ticketIdx].ticketColor = newTicketColor;
+        ticketsArr[ticketIdx].ticketColor = newTicketColor;
         localStorage.setItem("tickets", JSON.stringify(ticketsArr));
     });
 }
 
 //--------------------------Handle Lock/Unlock to edit content--------------------------
 
-function handleLock(ticket, id) {}
+function handleLock(ticket, id) {
+    let ticketLockElem = ticket.querySelector(".ticket-lock");
+    let ticketLock = ticketLockElem.children[0];
+    let taskArea = ticket.querySelector(".task-area");
+
+    ticketLock.addEventListener("click", () => {
+        let ticketIdx = getTicketIndex(id);
+        if (ticketLock.classList.contains(lockClass)) {
+            ticketLock.classList.remove(lockClass);
+            ticketLock.classList.add(unlockClass);
+            taskArea.setAttribute("contenteditable", "true");
+        } else {
+            ticketLock.classList.remove(unlockClass);
+            ticketLock.classList.add(lockClass);
+            taskArea.setAttribute("contenteditable", "false");
+        }
+
+        ticketsArr[ticketIdx].data = taskArea.innerText;
+
+        localStorage.setItem("tickets", JSON.stringify(ticketsArr));
+    });
+}
